@@ -1,5 +1,6 @@
 package view;
 
+import controller.LoginController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,8 +13,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import view.AdminDashboardView;
 
 public class LoginView {
+
+    private LoginController loginController;
+
+    public LoginView() {
+        loginController = new LoginController();
+    }
 
     public Scene createScene() {
 
@@ -52,6 +61,9 @@ public class LoginView {
         passwordField.getStyleClass().add("input");
         passwordField.setPrefHeight(58);
 
+        Text messageText = new Text();
+        messageText.getStyleClass().add("small-text");
+
         CheckBox rememberMe = new CheckBox("Remember me");
         rememberMe.getStyleClass().add("small-text");
         rememberMe.setSelected(true);
@@ -69,6 +81,28 @@ public class LoginView {
         loginButton.setPrefHeight(60);
         loginButton.setMaxWidth(Double.MAX_VALUE);
 
+        loginButton.setOnAction(event -> {
+
+    model.User user = loginController.handleLogin(
+            userIdField.getText(),
+            passwordField.getText()
+    );
+
+    if (user != null) {
+
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+
+        AdminDashboardView dashboard = new AdminDashboardView(user);
+
+        stage.setScene(dashboard.createScene());
+        stage.setTitle("Brainware Smart Library - Admin Dashboard");
+
+    } else {
+        messageText.setText("Invalid User ID or Password.");
+        messageText.setStyle("-fx-fill: #ef4444;");
+    }
+});
+
         Text demoText = new Text("NEW TO BRAINWARE SMART LIBRARY?");
         demoText.getStyleClass().add("footer");
 
@@ -83,6 +117,7 @@ public class LoginView {
                 passwordField,
                 options,
                 loginButton,
+                messageText,
                 demoText,
                 accessText
         );
