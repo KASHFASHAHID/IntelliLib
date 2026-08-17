@@ -1,5 +1,5 @@
 -- ===========================================
--- Brainware Smart Library Database
+-- IntelliLib Database
 -- Author: Kashfa Shahid
 -- ===========================================
 
@@ -163,4 +163,20 @@ CREATE TABLE activity_logs (
     details TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+CREATE TABLE password_reset_otps (
+    reset_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(30) NOT NULL,
+    otp_hash VARCHAR(255) NOT NULL,
+    expires_at TIMESTAMP NOT NULL,
+    attempt_count INT NOT NULL DEFAULT 0,
+    is_used BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+    INDEX idx_password_reset_user (user_id),
+    INDEX idx_password_reset_expiry (expires_at)
 );

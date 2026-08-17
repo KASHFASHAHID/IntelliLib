@@ -16,3 +16,18 @@ target/
 # OS files
 .DS_Store
 Thumbs.db
+# Environment / secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Local deployment/build artifacts
+deployment/
+*.msi
+*.exe
+*.bat
+
+# Local project files
+classpath.txt
+launch-error.txt
