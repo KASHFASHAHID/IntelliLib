@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IntelliLib | Smart Library Management System</title>
+
+    <meta name="description"
+          content="IntelliLib is a modern JavaFX Library Management System for students, teachers, librarians and administrators.">
+
+    <meta name="keywords"
+          content="IntelliLib, Library Management System, JavaFX, Brainware University, Library Software">
+
+    <meta name="author" content="Kashfa Shahid">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5fbfd;
+            color: #17212b;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e5eef2;
+        }
+
+        .nav-container {
+            max-width: 1150px;
+            margin: auto;
+            height: 72px;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #102536;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #03c9df, #087db8);
+            box-shadow: 0 8px 20px rgba(0, 174, 220, 0.25);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #52636f;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #039cc7;
+        }
+
+        .nav-download {
+            padding: 10px 18px;
+            border-radius: 9px;
+            background: #09afd0;
+            color: white !important;
+            box-shadow: 0 5px 15px rgba(0, 175, 210, 0.2);
+        }
+
+        .nav-download:hover {
+            background: #078eaf;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            max-width: 1150px;
+            margin: 55px auto 35px;
+            padding: 0 25px;
+        }
+
+        .hero-card {
+            min-height: 540px;
+            border-radius: 30px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: linear-gradient(135deg, #07141e, #092b3e 60%, #063b54);
+            box-shadow: 0 25px 60px rgba(9, 44, 61, 0.18);
+        }
+
+        .hero-left {
+            padding: 65px 55px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .badge {
+            width: fit-content;
+            padding: 7px 13px;
+            border: 1px solid rgba(71, 218, 245, 0.3);
+            background: rgba(10, 199, 230, 0.1);
+            color: #57e3f6;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #1ed0ed;
+        }
+
+        .hero-description {
+            max-width: 500px;
+            color: #b7cbd5;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            color: white;
+            background: linear-gradient(135deg, #08c8e5, #058fb9);
+            box-shadow: 0 10px 25px rgba(0, 193, 225, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .hero-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background:
+                radial-gradient(circle at center,
+                rgba(0, 205, 239, 0.22),
+                transparent 55%);
+        }
+
+        /* Application preview */
+
+        .app-preview {
+            width: 100%;
+            max-width: 440px;
+            background: #f9fbfc;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+            transform: rotate(1deg);
+        }
+
+        .preview-window {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #dce8ed;
+        }
+
+        .preview-top {
+            height: 35px;
+            background: #edf4f6;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #b6c7cd;
+        }
+
+        .preview-body {
+            display: grid;
+            grid-template-columns: 105px 1fr;
+            min-height: 300px;
+        }
+
+        .preview-sidebar {
+            background: #09283a;
+            padding: 18px 10px;
+        }
+
+        .preview-brand {
+            color: white;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            padding: 5px;
+        }
+
+        .preview-menu {
+            height: 25px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .preview-menu.active {
+            background: #08b9d7;
+        }
+
+        .preview-content {
+            padding: 20px;
+            background: #f8fbfc;
+        }
+
+        .preview-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .preview-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .mini-card {
+            background: white;
+            border: 1px solid #e5eef1;
+            border-radius: 9px;
+            padding: 12px;
+        }
+
+        .mini-number {
+            font-size: 20px;
+            font-weight: 800;
+            color: #079ec0;
+        }
+
+        .mini-label {
+            font-size: 9px;
+            color: #82939b;
+        }
+
+        .preview-table {
+            margin-top: 12px;
+            background: white;
+            border-radius: 9px;
+            padding: 12px;
+        }
+
+        .table-line {
+            height: 8px;
+            background: #e7eef1;
+            border-radius: 5px;
+            margin: 8px 0;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            max-width: 1050px;
+            margin: 45px auto;
+            padding: 0 25px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid #e3edf0;
+            border-radius: 15px;
+            padding: 22px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 25px;
+            font-weight: 800;
+            color: #049fc3;
+        }
+
+        .stat-text {
+            font-size: 12px;
+            color: #71818a;
+            margin-top: 4px;
+        }
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+
+        section {
+            max-width: 1050px;
+            margin: 90px auto;
+            padding: 0 25px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-heading .small {
+            color: #06a4c6;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .section-heading h2 {
+            margin-top: 8px;
+            font-size: 35px;
+            color: #102b3b;
+        }
+
+        .section-heading p {
+            max-width: 620px;
+            margin: 10px auto;
+            color: #71818a;
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid #e3edf0;
+            border-radius: 17px;
+            padding: 25px;
+            transition: 0.25s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(20, 75, 95, 0.08);
+            border-color: #bcebf2;
+        }
+
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: #e5f9fc;
+            color: #049fbd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 17px;
+        }
+
+        .feature h3 {
+            font-size: 16px;
+            margin-bottom: 7px;
+            color: #173646;
+        }
+
+        .feature p {
+            font-size: 13px;
+            color: #73838b;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            background: #082333;
+            border-radius: 25px;
+            padding: 45px;
+            color: white;
+        }
+
+        .about-card h2 {
+            font-size: 31px;
+            margin-bottom: 15px;
+        }
+
+        .about-card p {
+            color: #b6cbd4;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .tech-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .tech {
+            padding: 11px;
+            border-radius: 9px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #d4e6ec;
+            font-size: 13px;
+        }
+
+        /* =========================
+           DOWNLOAD
+        ========================= */
+
+        .download-section {
+            text-align: center;
+        }
+
+        .download-card {
+            background: linear-gradient(135deg, #06b8d7, #087eaa);
+            color: white;
+            border-radius: 25px;
+            padding: 55px 25px;
+            box-shadow: 0 20px 45px rgba(0, 146, 180, 0.18);
+        }
+
+        .download-card h2 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .download-card p {
+            max-width: 580px;
+            margin: 0 auto 25px;
+            color: #d8f8fc;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 25px;
+            background: white;
+            color: #087ea6;
+            border-radius: 10px;
+            font-weight: 800;
+            transition: 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .download-note {
+            margin-top: 15px;
+            font-size: 11px;
+            color: #d0f2f7;
+        }
+
+        /* =========================
+           REQUIREMENTS
+        ========================= */
+
+        .requirements {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .requirement {
+            background: white;
+            border: 1px solid #e1ecef;
+            border-radius: 16px;
+            padding: 23px;
+        }
+
+        .requirement h3 {
+            font-size: 15px;
+            color: #173646;
+            margin-bottom: 8px;
+        }
+
+        .requirement p {
+            font-size: 13px;
+            color: #71818a;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            margin-top: 90px;
+            background: #071923;
+            color: white;
+            padding: 45px 25px 25px;
+        }
+
+        .footer-container {
+            max-width: 1050px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-brand h3 {
+            font-size: 20px;
+            margin-bottom: 7px;
+        }
+
+        .footer-brand p {
+            color: #91a9b3;
+            font-size: 12px;
+            max-width: 350px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .footer-links a {
+            color: #a9c0c9;
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            color: #24cde8;
+        }
+
+        .copyright {
+            max-width: 1050px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #708891;
+            font-size: 11px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-card {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                padding: 45px 30px;
+            }
+
+            .hero-right {
+                padding: 30px;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-card {
+                grid-template-columns: 1fr;
+            }
+
+            .requirements {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .hero {
+                margin-top: 25px;
+            }
+
+            .hero-left {
+                padding: 35px 22px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-card {
+                padding: 30px 22px;
+            }
+
+            .tech-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav class="navbar">
+    <div class="nav-container">
+
+        <a href="#" class="logo">
+            <div class="logo-icon">IL</div>
+            IntelliLib
+        </a>
+
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#requirements">Requirements</a>
+            <a href="#download" class="nav-download">Download</a>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+    <div class="hero-card">
+
+        <div class="hero-left">
+
+            <div class="badge">
+                JAVA DESKTOP APPLICATION • VERSION 1.0.0
+            </div>
+
+            <h1>
+                Smarter Library.<br>
+                <span>Better Experience.</span>
+            </h1>
+
+            <p class="hero-description">
+                IntelliLib is a modern library management system designed
+                to make discovering, borrowing and managing library
+                resources simple, secure and efficient.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a class="btn btn-primary"
+                   href="https://github.com/KASHFASHAHID/IntelliLib/releases/latest/download/IntelliLib.msi">
+                    ↓ Download for Windows
+                </a>
+
+                <a class="btn btn-secondary"
+                   href="https://github.com/KASHFASHAHID/IntelliLib"
+                   target="_blank">
+                    View on GitHub →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-right">
+
+            <div class="app-preview">
+
+                <div class="preview-window">
+
+                    <div class="preview-top">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+
+                    <div class="preview-body">
+
+                        <div class="preview-sidebar">
+
+                            <div class="preview-brand">
+                                IntelliLib
+                            </div>
+
+                            <div class="preview-menu active"></div>
+                            <div class="preview-menu"></div>
+                            <div class="preview-menu"></div>
+                            <div class="preview-menu"></div>
+                            <div class="preview-menu"></div>
+
+                        </div>
+
+                        <div class="preview-content">
+
+                            <div class="preview-title">
+                                Library Dashboard
+                            </div>
+
+                            <div class="preview-cards">
+
+                                <div class="mini-card">
+                                    <div class="mini-number">73</div>
+                                    <div class="mini-label">
+                                        Books
+                                    </div>
+                                </div>
+
+                                <div class="mini-card">
+                                    <div class="mini-number">55</div>
+                                    <div class="mini-label">
+                                        Active Loans
+                                    </div>
+                                </div>
+
+                                <div class="mini-card">
+                                    <div class="mini-number">9</div>
+                                    <div class="mini-label">
+                                        Reservations
+                                    </div>
+                                </div>
+
+                                <div class="mini-card">
+                                    <div class="mini-number">12</div>
+                                    <div class="mini-label">
+                                        Users
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="preview-table">
+                                <div class="table-line"></div>
+                                <div class="table-line"></div>
+                                <div class="table-line"></div>
+                                <div class="table-line"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-number">4</div>
+        <div class="stat-text">User Roles</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-number">73+</div>
+        <div class="stat-text">Books Managed</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-number">10+</div>
+        <div class="stat-text">Management Modules</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-number">1.0.0</div>
+        <div class="stat-text">Current Release</div>
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section id="features">
+
+    <div class="section-heading">
+
+        <div class="small">Everything you need</div>
+
+        <h2>Powerful Library Features</h2>
+
+        <p>
+            IntelliLib brings essential library operations together
+            in one modern desktop application.
+        </p>
+
+    </div>
+
+
+    <div class="features-grid">
+
+        <div class="feature">
+            <div class="feature-icon">📚</div>
+            <h3>Book Management</h3>
+            <p>
+                Manage books, authors, categories and individual
+                book copies efficiently.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">↔</div>
+            <h3>Issue & Return</h3>
+            <p>
+                Track book borrowing and returns with automatic
+                due-date management.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔔</div>
+            <h3>Reservations</h3>
+            <p>
+                Manage book reservations and reservation queues
+                with notifications.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">₹</div>
+            <h3>Fine Management</h3>
+            <p>
+                Track overdue books and manage library fines
+                accurately.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Reports & Analytics</h3>
+            <p>
+                Get useful insights into books, loans, users,
+                fines and library activity.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔐</div>
+            <h3>Secure Authentication</h3>
+            <p>
+                Role-based access, secure password handling
+                and OTP password recovery.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">👥</div>
+            <h3>Membership Management</h3>
+            <p>
+                Manage student, teacher, librarian and
+                administrator accounts.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">✉</div>
+            <h3>Email Notifications</h3>
+            <p>
+                Send important library-related notifications
+                through email.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">☁</div>
+            <h3>Cloud Database</h3>
+            <p>
+                Connect to a MySQL cloud database for
+                centralized library information.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about">
+
+    <div class="about-card">
+
+        <div>
+
+            <h2>Built for modern libraries.</h2>
+
+            <p>
+                IntelliLib is designed to simplify everyday library
+                operations while providing different dashboards
+                and permissions for each type of user.
+            </p>
+
+            <p>
+                From searching for books to managing loans,
+                reservations, fines, notifications and reports,
+                everything is organized in one application.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h2>Technology</h2>
+
+            <div class="tech-list">
+
+                <div class="tech">Java</div>
+                <div class="tech">JavaFX</div>
+                <div class="tech">MySQL</div>
+                <div class="tech">Maven</div>
+                <div class="tech">MVC Architecture</div>
+                <div class="tech">Repository Pattern</div>
+                <div class="tech">Service Layer</div>
+                <div class="tech">BCrypt Security</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DOWNLOAD
+========================= -->
+
+<section id="download" class="download-section">
+
+    <div class="download-card">
+
+        <h2>Ready to use IntelliLib?</h2>
+
+        <p>
+            Download the latest Windows installer and start
+            managing your library with IntelliLib.
+        </p>
+
+        <a class="download-btn"
+           href="https://github.com/KASHFASHAHID/IntelliLib/releases/latest/download/IntelliLib.msi">
+            ↓ Download IntelliLib.msi
+        </a>
+
+        <div class="download-note">
+            Windows • Version 1.0.0 • MSI Installer
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REQUIREMENTS
+========================= -->
+
+<section id="requirements">
+
+    <div class="section-heading">
+
+        <div class="small">Before installation</div>
+
+        <h2>System Requirements</h2>
+
+        <p>
+            Make sure your system meets these basic requirements
+            before installing IntelliLib.
+        </p>
+
+    </div>
+
+
+    <div class="requirements">
+
+        <div class="requirement">
+            <h3>🪟 Operating System</h3>
+            <p>
+                Windows 10 or later.
+            </p>
+        </div>
+
+        <div class="requirement">
+            <h3>☕ Java Runtime</h3>
+            <p>
+                A compatible Java runtime environment is required
+                if not bundled with the application.
+            </p>
+        </div>
+
+        <div class="requirement">
+            <h3>🌐 Internet</h3>
+            <p>
+                Internet connection is required for the cloud
+                database and email-related features.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INSTALLATION
+========================= -->
+
+<section>
+
+    <div class="section-heading">
+
+        <div class="small">Getting started</div>
+
+        <h2>Simple Installation</h2>
+
+    </div>
+
+
+    <div class="features-grid">
+
+        <div class="feature">
+            <div class="feature-icon">01</div>
+            <h3>Download</h3>
+            <p>
+                Download the IntelliLib MSI installer from
+                the official release.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">02</div>
+            <h3>Install</h3>
+            <p>
+                Run IntelliLib.msi and follow the Windows
+                installation steps.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">03</div>
+            <h3>Launch</h3>
+            <p>
+                Open IntelliLib from the Start Menu or
+                Desktop shortcut.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <h3>IntelliLib</h3>
+
+            <p>
+                A modern JavaFX Library Management System
+                designed for smarter library operations.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#features">Features</a>
+
+            <a href="#about">About</a>
+
+            <a href="#download">Download</a>
+
+            <a href="https://github.com/KASHFASHAHID/IntelliLib"
+               target="_blank">
+                GitHub
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+        © 2026 Kashfa Shahid · IntelliLib · JavaFX Library Management System
+    </div>
+
+</footer>
+
+
+</body>
+</html>
